@@ -1,8 +1,8 @@
 # Company register
 
 [![Build Status](https://travis-ci.org/internetee/company_register.svg?branch=master)](https://travis-ci.org/internetee/company_register)
-[![Code Climate](https://codeclimate.com/github/internetee/company_register/badges/gpa.svg)](https://codeclimate.com/github/internetee/company_register)
-[![Test Coverage](https://codeclimate.com/github/internetee/company_register/badges/coverage.svg)](https://codeclimate.com/github/internetee/company_register/coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/308a0549a609c62b8f30/maintainability)](https://codeclimate.com/github/internetee/company_register/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/308a0549a609c62b8f30/test_coverage)](https://codeclimate.com/github/internetee/company_register/test_coverage)
 
 A Ruby interface to the Estonian company register (Äriregister) API.
 
