@@ -4,5 +4,6 @@ module CompanyRegister
     attr_accessor :password
     attr_accessor :wsdl
     attr_accessor :endpoint
+    attr_accessor :cache_period
   end
 end
