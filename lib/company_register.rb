@@ -1,3 +1,5 @@
+require 'savon'
+
 require 'company_register/version'
 require 'company_register/client'
 require 'company_register/configuration'

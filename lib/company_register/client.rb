@@ -2,8 +2,10 @@ module CompanyRegister
   Company = Struct.new(:registration_number)
 
   class Client
-    def initialize(soap_client)
-      @soap_client = soap_client
+    def initialize
+      @soap_client = Savon.client(wsdl: CompanyRegister.configuration.wsdl,
+                                  host: CompanyRegister.configuration.endpoint,
+                                  endpoint: CompanyRegister.configuration.endpoint)
     end
 
     # @citizen_country_code format [String] ISO 3166-1 alpha-3

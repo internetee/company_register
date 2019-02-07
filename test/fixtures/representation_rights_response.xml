@@ -1,0 +1,73 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ZSI="http://www.zolera.com/schemas/ZSI/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body xmlns:ns1="http://arireg.x-road.eu/producer/">
+    <ns1:esindus_v1Response>
+      <ns1:paring>
+        <ns1:ariregister_kasutajanimi>john</ns1:ariregister_kasutajanimi>
+        <ns1:ariregister_parool>pwd</ns1:ariregister_parool>
+        <ns1:fyysilise_isiku_kood>1234</ns1:fyysilise_isiku_kood>
+        <ns1:fyysilise_isiku_koodi_riik>USA</ns1:fyysilise_isiku_koodi_riik>
+        <ns1:keel>eng</ns1:keel>
+      </ns1:paring>
+      <ns1:keha>
+        <ns1:ettevotjad>
+          <ns1:item>
+            <ns1:ariregistri_kood>12345</ns1:ariregistri_kood>
+            <ns1:arinimi>osa&#xFC;hing Rajetol</ns1:arinimi>
+            <ns1:staatus>R</ns1:staatus>
+            <ns1:staatus_tekstina>Entered into the register</ns1:staatus_tekstina>
+            <ns1:isikud>
+              <ns1:item>
+                <ns1:isiku_liik>F</ns1:isiku_liik>
+                <ns1:fyysilise_isiku_eesnimi>Katrin</ns1:fyysilise_isiku_eesnimi>
+                <ns1:fyysilise_isiku_perenimi>Kaerlepp</ns1:fyysilise_isiku_perenimi>
+                <ns1:fyysilise_isiku_kood>48110240219</ns1:fyysilise_isiku_kood>
+                <ns1:isikukood_riik>EST</ns1:isikukood_riik>
+                <ns1:isikukoodi_riik_tekstina>Estonia</ns1:isikukoodi_riik_tekstina>
+                <ns1:fyysilise_isiku_roll>JUHL</ns1:fyysilise_isiku_roll>
+                <ns1:fyysilise_isiku_roll_tekstina>Management board member</ns1:fyysilise_isiku_roll_tekstina>
+                <ns1:ainuesindusoigus_olemas>JAH</ns1:ainuesindusoigus_olemas>
+              </ns1:item>
+              <ns1:item>
+                <ns1:isiku_liik>F</ns1:isiku_liik>
+                <ns1:fyysilise_isiku_eesnimi>Raimo</ns1:fyysilise_isiku_eesnimi>
+                <ns1:fyysilise_isiku_perenimi>Alak&#xFC;la</ns1:fyysilise_isiku_perenimi>
+                <ns1:fyysilise_isiku_kood>38111112223</ns1:fyysilise_isiku_kood>
+                <ns1:isikukood_riik>EST</ns1:isikukood_riik>
+                <ns1:isikukoodi_riik_tekstina>Estonia</ns1:isikukoodi_riik_tekstina>
+                <ns1:fyysilise_isiku_roll>JUHL</ns1:fyysilise_isiku_roll>
+                <ns1:fyysilise_isiku_roll_tekstina>Management board member</ns1:fyysilise_isiku_roll_tekstina>
+                <ns1:ainuesindusoigus_olemas>JAH</ns1:ainuesindusoigus_olemas>
+              </ns1:item>
+            </ns1:isikud>
+            <ns1:esindusoiguse_eritingimused/>
+            <ns1:oiguslik_vorm>O&#xDC;</ns1:oiguslik_vorm>
+            <ns1:oiguslik_vorm_tekstina>Private limited company</ns1:oiguslik_vorm_tekstina>
+          </ns1:item>
+          <ns1:item>
+            <ns1:ariregistri_kood>123456</ns1:ariregistri_kood>
+            <ns1:arinimi>O&#xDC; GCG Partnerid</ns1:arinimi>
+            <ns1:staatus>R</ns1:staatus>
+            <ns1:staatus_tekstina>Entered into the register</ns1:staatus_tekstina>
+            <ns1:isikud>
+              <ns1:item>
+                <ns1:isiku_liik>F</ns1:isiku_liik>
+                <ns1:fyysilise_isiku_eesnimi>Timo</ns1:fyysilise_isiku_eesnimi>
+                <ns1:fyysilise_isiku_perenimi>V&#xF5;hmar</ns1:fyysilise_isiku_perenimi>
+                <ns1:fyysilise_isiku_kood>38208122210</ns1:fyysilise_isiku_kood>
+                <ns1:isikukood_riik>EST</ns1:isikukood_riik>
+                <ns1:isikukoodi_riik_tekstina>Estonia</ns1:isikukoodi_riik_tekstina>
+                <ns1:fyysilise_isiku_roll>JUHL</ns1:fyysilise_isiku_roll>
+                <ns1:fyysilise_isiku_roll_tekstina>Management board member</ns1:fyysilise_isiku_roll_tekstina>
+                <ns1:ainuesindusoigus_olemas>JAH</ns1:ainuesindusoigus_olemas>
+              </ns1:item>
+            </ns1:isikud>
+            <ns1:esindusoiguse_eritingimused/>
+            <ns1:oiguslik_vorm>O&#xDC;</ns1:oiguslik_vorm>
+            <ns1:oiguslik_vorm_tekstina>Private limited company</ns1:oiguslik_vorm_tekstina>
+          </ns1:item>
+        </ns1:ettevotjad>
+      </ns1:keha>
+    </ns1:esindus_v1Response>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
