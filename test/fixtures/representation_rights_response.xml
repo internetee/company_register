@@ -13,15 +13,15 @@
         <ns1:ettevotjad>
           <ns1:item>
             <ns1:ariregistri_kood>12345</ns1:ariregistri_kood>
-            <ns1:arinimi>osa&#xFC;hing Rajetol</ns1:arinimi>
+            <ns1:arinimi>Acme Ltd</ns1:arinimi>
             <ns1:staatus>R</ns1:staatus>
             <ns1:staatus_tekstina>Entered into the register</ns1:staatus_tekstina>
             <ns1:isikud>
               <ns1:item>
                 <ns1:isiku_liik>F</ns1:isiku_liik>
-                <ns1:fyysilise_isiku_eesnimi>Katrin</ns1:fyysilise_isiku_eesnimi>
-                <ns1:fyysilise_isiku_perenimi>Kaerlepp</ns1:fyysilise_isiku_perenimi>
-                <ns1:fyysilise_isiku_kood>48110240219</ns1:fyysilise_isiku_kood>
+                <ns1:fyysilise_isiku_eesnimi>John</ns1:fyysilise_isiku_eesnimi>
+                <ns1:fyysilise_isiku_perenimi>Smith</ns1:fyysilise_isiku_perenimi>
+                <ns1:fyysilise_isiku_kood>123456</ns1:fyysilise_isiku_kood>
                 <ns1:isikukood_riik>EST</ns1:isikukood_riik>
                 <ns1:isikukoodi_riik_tekstina>Estonia</ns1:isikukoodi_riik_tekstina>
                 <ns1:fyysilise_isiku_roll>JUHL</ns1:fyysilise_isiku_roll>
@@ -30,9 +30,9 @@
               </ns1:item>
               <ns1:item>
                 <ns1:isiku_liik>F</ns1:isiku_liik>
-                <ns1:fyysilise_isiku_eesnimi>Raimo</ns1:fyysilise_isiku_eesnimi>
-                <ns1:fyysilise_isiku_perenimi>Alak&#xFC;la</ns1:fyysilise_isiku_perenimi>
-                <ns1:fyysilise_isiku_kood>38111112223</ns1:fyysilise_isiku_kood>
+                <ns1:fyysilise_isiku_eesnimi>Jane</ns1:fyysilise_isiku_eesnimi>
+                <ns1:fyysilise_isiku_perenimi>Doe</ns1:fyysilise_isiku_perenimi>
+                <ns1:fyysilise_isiku_kood>1234567</ns1:fyysilise_isiku_kood>
                 <ns1:isikukood_riik>EST</ns1:isikukood_riik>
                 <ns1:isikukoodi_riik_tekstina>Estonia</ns1:isikukoodi_riik_tekstina>
                 <ns1:fyysilise_isiku_roll>JUHL</ns1:fyysilise_isiku_roll>
@@ -46,15 +46,15 @@
           </ns1:item>
           <ns1:item>
             <ns1:ariregistri_kood>123456</ns1:ariregistri_kood>
-            <ns1:arinimi>O&#xDC; GCG Partnerid</ns1:arinimi>
+            <ns1:arinimi>Umbrella Corp</ns1:arinimi>
             <ns1:staatus>R</ns1:staatus>
             <ns1:staatus_tekstina>Entered into the register</ns1:staatus_tekstina>
             <ns1:isikud>
               <ns1:item>
                 <ns1:isiku_liik>F</ns1:isiku_liik>
-                <ns1:fyysilise_isiku_eesnimi>Timo</ns1:fyysilise_isiku_eesnimi>
-                <ns1:fyysilise_isiku_perenimi>V&#xF5;hmar</ns1:fyysilise_isiku_perenimi>
-                <ns1:fyysilise_isiku_kood>38208122210</ns1:fyysilise_isiku_kood>
+                <ns1:fyysilise_isiku_eesnimi>William</ns1:fyysilise_isiku_eesnimi>
+                <ns1:fyysilise_isiku_perenimi>Jenkins</ns1:fyysilise_isiku_perenimi>
+                <ns1:fyysilise_isiku_kood>12345678</ns1:fyysilise_isiku_kood>
                 <ns1:isikukood_riik>EST</ns1:isikukood_riik>
                 <ns1:isikukoodi_riik_tekstina>Estonia</ns1:isikukoodi_riik_tekstina>
                 <ns1:fyysilise_isiku_roll>JUHL</ns1:fyysilise_isiku_roll>
