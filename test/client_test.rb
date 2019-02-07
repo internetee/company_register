@@ -13,11 +13,11 @@ class CompanyRegisterTest < Minitest::Test
     stub_request(:get, 'http://company-register.test/wsdl').to_return(status: 200,
                                                                       body: wsdl_response_body)
 
+    response_body = File.read('test/fixtures/representation_rights_response.xml')
     request_stub = stub_request(:post, "http://company-register.test/").
         with(
-            body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ar=\"http://arireg.x-road.eu/producer/\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><ar:esindus_v1><ar:keha><ar:fyysilise_isiku_kood>1234</ar:fyysilise_isiku_kood><ar:fyysilise_isiku_koodi_riik>USA</ar:fyysilise_isiku_koodi_riik><ar:keel>eng</ar:keel><ar:ariregister_kasutajanimi>john</ar:ariregister_kasutajanimi><ar:ariregister_parool>pwd</ar:ariregister_parool></ar:keha></ar:esindus_v1></env:Body></env:Envelope>",
-            headers: { 'Soapaction' => '"esindus_v1"' })
-                       .to_return(status: 200, body: File.read('test/fixtures/representation_rights_response.xml'))
+            body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ar=\"http://arireg.x-road.eu/producer/\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><ar:esindus_v1><ar:keha><ar:ariregister_kasutajanimi>john</ar:ariregister_kasutajanimi><ar:ariregister_parool>pwd</ar:ariregister_parool><ar:fyysilise_isiku_kood>1234</ar:fyysilise_isiku_kood><ar:fyysilise_isiku_koodi_riik>USA</ar:fyysilise_isiku_koodi_riik><ar:keel>eng</ar:keel></ar:keha></ar:esindus_v1></env:Body></env:Envelope>",
+            headers: { 'Soapaction' => '"esindus_v1"' }).to_return(status: 200, body: response_body)
 
     client = CompanyRegister::Client.new
     companies = client.representation_rights(citizen_personal_code: '1234',
