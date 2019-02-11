@@ -7,14 +7,15 @@ class CompanyRegisterTest < Minitest::Test
       config.password = 'pwd'
       config.wsdl = 'http://company-register.test/wsdl'
       config.endpoint = 'http://company-register.test'
+      config.cache_store = ActiveSupport::Cache::NullStore.new
     end
-  end
 
-  def test_queries_representation_rights
     wsdl_response_body = File.read('test/fixtures/wsdl.xml')
     stub_request(:get, 'http://company-register.test/wsdl').to_return(status: 200,
                                                                       body: wsdl_response_body)
+  end
 
+  def test_queries_representation_rights
     response_body = File.read('test/fixtures/representation_rights_response_with_result.xml')
     request_stub = stub_request(:post, 'http://company-register.test/').
         with(
@@ -32,10 +33,6 @@ class CompanyRegisterTest < Minitest::Test
   end
 
   def test_representation_rights_no_result
-    wsdl_response_body = File.read('test/fixtures/wsdl.xml')
-    stub_request(:get, 'http://company-register.test/wsdl').to_return(status: 200,
-                                                                      body: wsdl_response_body)
-
     response_body = File.read('test/fixtures/representation_rights_response_without_result.xml')
     stub_request(:post, 'http://company-register.test/').to_return(status: 200,
                                                                    body: response_body)

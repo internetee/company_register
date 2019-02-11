@@ -2,8 +2,8 @@ module CompanyRegister
   Company = Struct.new(:registration_number)
 
   class Client
-    def initialize
-      @cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+    def initialize(cache_store = CompanyRegister.configuration.cache_store)
+      @cache_store = cache_store
     end
 
     # @citizen_country_code format [String] ISO 3166-1 alpha-3
@@ -13,7 +13,8 @@ module CompanyRegister
                         'keel' => 'eng' }
 
       request = Request::RepresentationRights.new(search_params)
-      response_body = @cache.fetch(request) do
+      response_body = cache_store.fetch(request,
+                                        expires_in: CompanyRegister.configuration.cache_period) do
         response = request.perform
         response.body
       end
@@ -22,6 +23,8 @@ module CompanyRegister
     end
 
     private
+
+    attr_reader :cache_store
 
     def parse_representation_rights_response_body(body)
       return [] unless body[:esindus_v1_response][:keha][:ettevotjad]
