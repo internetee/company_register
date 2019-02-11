@@ -7,6 +7,7 @@ class ConfigurationTest < Minitest::Test
       config.password = 'pwd'
       config.wsdl = 'http://wsdl.test'
       config.endpoint = 'http://company-register.test'
+      config.cache_store = 'some store'
       config.cache_period = 1
     end
 
@@ -14,6 +15,7 @@ class ConfigurationTest < Minitest::Test
     assert_equal 'pwd', CompanyRegister.configuration.password
     assert_equal 'http://wsdl.test', CompanyRegister.configuration.wsdl
     assert_equal 'http://company-register.test', CompanyRegister.configuration.endpoint
+    assert_equal 'some store', CompanyRegister.configuration.cache_store
     assert_equal 1, CompanyRegister.configuration.cache_period
   end
 end
