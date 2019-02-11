@@ -24,6 +24,8 @@ module CompanyRegister
     private
 
     def parse_representation_rights_response_body(body)
+      return [] unless body[:esindus_v1_response][:keha][:ettevotjad]
+
       items = body[:esindus_v1_response][:keha][:ettevotjad][:item]
       items = [items] unless items.kind_of?(Array)
       items.map { |item| Company.new(item[:ariregistri_kood]) }

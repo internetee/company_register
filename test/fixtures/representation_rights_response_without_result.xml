@@ -1,0 +1,18 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ZSI="http://www.zolera.com/schemas/ZSI/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body xmlns:ns1="http://arireg.x-road.eu/producer/">
+    <ns1:esindus_v1Response>
+      <ns1:paring>
+        <ns1:ariregister_kasutajanimi>john</ns1:ariregister_kasutajanimi>
+        <ns1:ariregister_parool>pwd</ns1:ariregister_parool>
+        <ns1:fyysilise_isiku_kood>1234</ns1:fyysilise_isiku_kood>
+        <ns1:fyysilise_isiku_koodi_riik>USA</ns1:fyysilise_isiku_koodi_riik>
+        <ns1:keel>eng</ns1:keel>
+      </ns1:paring>
+      <ns1:keha>
+        <ns1:ettevotjad>
+        </ns1:ettevotjad>
+      </ns1:keha>
+    </ns1:esindus_v1Response>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
