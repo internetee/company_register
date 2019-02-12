@@ -12,7 +12,7 @@ module CompanyRegister
     end
 
     def cache_key
-      'test'
+      search_params.to_json
     end
 
     private
