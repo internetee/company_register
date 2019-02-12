@@ -10,9 +10,7 @@ class CompanyRegisterTest < Minitest::Test
       config.cache_store = ActiveSupport::Cache::NullStore.new
     end
 
-    wsdl_response_body = File.read('test/fixtures/wsdl.xml')
-    stub_request(:get, 'http://company-register.test/wsdl').to_return(status: 200,
-                                                                      body: wsdl_response_body)
+    stub_wsdl_request
   end
 
   def teardown
@@ -45,5 +43,13 @@ class CompanyRegisterTest < Minitest::Test
     companies = client.representation_rights(citizen_personal_code: '1234',
                                              citizen_country_code: 'USA')
     assert_empty companies
+  end
+
+  private
+
+  def stub_wsdl_request
+    response_body = File.read('test/fixtures/wsdl.xml')
+    stub_request(:get, 'http://company-register.test/wsdl').to_return(status: 200,
+                                                                      body: response_body)
   end
 end
