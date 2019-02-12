@@ -15,6 +15,10 @@ class CompanyRegisterTest < Minitest::Test
                                                                       body: wsdl_response_body)
   end
 
+  def teardown
+    CompanyRegister.configuration = nil
+  end
+
   def test_queries_representation_rights
     response_body = File.read('test/fixtures/representation_rights_response_with_result.xml')
     request_stub = stub_request(:post, 'http://company-register.test/').
