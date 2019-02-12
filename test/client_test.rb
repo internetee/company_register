@@ -15,6 +15,7 @@ class CompanyRegisterTest < Minitest::Test
 
   def teardown
     CompanyRegister.configuration = nil
+    WebMock.reset!
   end
 
   def test_queries_representation_rights
