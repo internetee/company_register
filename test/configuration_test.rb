@@ -6,8 +6,6 @@ class ConfigurationTest < Minitest::Test
     CompanyRegister.configure do |config|
       config.username = 'john'
       config.password = 'pwd'
-      config.wsdl = 'http://wsdl.test'
-      config.endpoint = 'http://company-register.test'
       config.cache_store = 'some store'
       config.cache_period = 1
     end

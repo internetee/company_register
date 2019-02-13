@@ -2,6 +2,12 @@ module CompanyRegister
   Company = Struct.new(:registration_number)
 
   class Client
+    WSDL_TEST = 'https://demo-ariregxmlv6.rik.ee/?wsdl'
+    WSDL_PRODUCTION = 'https://ariregxmlv6.rik.ee/?wsdl'
+
+    ENDPOINT_TEST = 'https://demo-ariregxmlv6.rik.ee/'
+    ENDPOINT_PRODUCTION = 'https://ariregxmlv6.rik.ee/'
+
     # API returns request params back with the response. These are stripped out to avoid caching
     # them.
     RESPONSE_FILTERED_PARAMS = %i[ariregister_kasutajanimi ariregister_parool]
