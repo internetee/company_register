@@ -2,6 +2,11 @@ module CompanyRegister
   Company = Struct.new(:registration_number)
 
   class Client
+    # API returns request params back with the response. These are stripped out to avoid caching
+    # them.
+    RESPONSE_FILTERED_PARAMS = %i[ariregister_kasutajanimi ariregister_parool]
+    private_constant :RESPONSE_FILTERED_PARAMS
+
     def initialize(cache_store = CompanyRegister.configuration.cache_store)
       @cache_store = cache_store
     end
@@ -16,7 +21,7 @@ module CompanyRegister
       response_body = cache_store.fetch(request,
                                         expires_in: CompanyRegister.configuration.cache_period) do
         response = request.perform
-        response.body
+        filter_response_body(response.body)
       end
 
       parse_representation_rights_response_body(response_body)
@@ -25,6 +30,17 @@ module CompanyRegister
     private
 
     attr_reader :cache_store
+
+    def filter_response_body(body)
+      # Do not mutate original hash
+      body = Marshal.load(Marshal.dump(body))
+
+      RESPONSE_FILTERED_PARAMS.each do |param|
+        body[:esindus_v1_response][:paring].delete(param)
+      end
+
+      body
+    end
 
     def parse_representation_rights_response_body(body)
       return [] unless body[:esindus_v1_response][:keha][:ettevotjad]
