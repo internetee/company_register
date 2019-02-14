@@ -8,10 +8,18 @@ module CompanyRegister
     # are using. Rails.cache is the default when used with Rails.
     attr_accessor :cache_store
 
-    attr_accessor :cache_period
+    attr_reader :cache_period
 
     def initialize
       self.cache_store = Rails.cache if defined?(Rails)
+    end
+
+    def cache_period=(value)
+      unless value.kind_of?(ActiveSupport::Duration)
+        raise ArgumentError, 'Instance of ActiveSupport::Duration is expected'
+      end
+
+      @cache_period = value
     end
   end
 end
