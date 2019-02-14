@@ -10,6 +10,9 @@ module CompanyRegister
 
     attr_reader :cache_period
 
+    # Requests in test mode are free of charge
+    attr_accessor :test_mode
+
     def initialize
       self.cache_store = Rails.cache if defined?(Rails)
     end

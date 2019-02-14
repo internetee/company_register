@@ -1,9 +1,21 @@
 module CompanyRegister
   class Request
+    WSDL_TEST = 'https://demo-ariregxmlv6.rik.ee/?wsdl'
+    private_constant :WSDL_TEST
+
+    WSDL_PRODUCTION = 'https://ariregxmlv6.rik.ee/?wsdl'
+    private_constant :WSDL_PRODUCTION
+
+    ENDPOINT_TEST = 'https://demo-ariregxmlv6.rik.ee/'
+    private_constant :ENDPOINT_TEST
+
+    ENDPOINT_PRODUCTION = 'https://ariregxmlv6.rik.ee/'
+    private_constant :ENDPOINT_PRODUCTION
+
     def initialize(search_params)
-      @soap_client = Savon.client(wsdl: CompanyRegister.configuration.wsdl,
-                                  host: CompanyRegister.configuration.endpoint,
-                                  endpoint: CompanyRegister.configuration.endpoint)
+      @soap_client = Savon.client(wsdl: WSDL_TEST,
+                                  host: ENDPOINT_TEST,
+                                  endpoint: ENDPOINT_TEST)
       @search_params = search_params
     end
 

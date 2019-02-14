@@ -12,15 +12,13 @@ class ConfigurationTest < Minitest::Test
       config.username = 'john'
       config.password = 'pwd'
       config.cache_store = 'some store'
-      config.cache_period = 1
+      config.test_mode = true
     end
 
     assert_equal 'john', CompanyRegister.configuration.username
     assert_equal 'pwd', CompanyRegister.configuration.password
     assert_equal 'some store', CompanyRegister.configuration.cache_store
-    assert_equal 1, CompanyRegister.configuration.cache_period
-
-    CompanyRegister.configuration = nil
+    assert CompanyRegister.configuration.test_mode
   end
 
   def test_sets_valid_cache_period

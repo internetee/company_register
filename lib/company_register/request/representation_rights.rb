@@ -1,6 +1,6 @@
 module CompanyRegister
   class Request
-    class RepresentationRights < Request
+    class RepresentationRightsRequest < Request
       private
 
       def soap_operation
