@@ -32,11 +32,11 @@ module CompanyRegister
     attr_reader :cache_store
 
     def filter_response_body(body)
-      # Do not mutate original hash
+      # Avoid parameter mutation
       body = Marshal.load(Marshal.dump(body))
 
-      RESPONSE_FILTERED_PARAMS.each do |param|
-        body[:esindus_v1_response][:paring].delete(param)
+      body[:esindus_v1_response][:paring].delete_if do |key, _value|
+        RESPONSE_FILTERED_PARAMS.include?(key)
       end
 
       body
