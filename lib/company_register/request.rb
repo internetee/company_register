@@ -15,7 +15,8 @@ module CompanyRegister
     def initialize(search_params)
       @soap_client = Savon.client(wsdl: WSDL_TEST,
                                   host: ENDPOINT_TEST,
-                                  endpoint: ENDPOINT_TEST)
+                                  endpoint: ENDPOINT_TEST,
+                                  filters: %w[ariregister_kasutajanimi ariregister_parool])
       @search_params = search_params
     end
 
