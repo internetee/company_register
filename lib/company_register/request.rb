@@ -16,7 +16,7 @@ module CompanyRegister
       @soap_client = Savon.client(wsdl: WSDL_TEST,
                                   host: ENDPOINT_TEST,
                                   endpoint: ENDPOINT_TEST,
-                                  filters: %w[ariregister_kasutajanimi ariregister_parool],
+                                  filters: %i[ariregister_kasutajanimi ariregister_parool],
                                   convert_request_keys_to: :none)
       @search_params = search_params
     end
