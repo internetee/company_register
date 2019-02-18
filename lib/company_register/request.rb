@@ -16,7 +16,8 @@ module CompanyRegister
       @soap_client = Savon.client(wsdl: WSDL_TEST,
                                   host: ENDPOINT_TEST,
                                   endpoint: ENDPOINT_TEST,
-                                  filters: %w[ariregister_kasutajanimi ariregister_parool])
+                                  filters: %w[ariregister_kasutajanimi ariregister_parool],
+                                  convert_request_keys_to: :none)
       @search_params = search_params
     end
 
@@ -34,8 +35,8 @@ module CompanyRegister
     attr_reader :search_params
 
     def default_params
-      { 'ariregister_kasutajanimi' => CompanyRegister.configuration.username,
-        'ariregister_parool' => CompanyRegister.configuration.password }
+      { ariregister_kasutajanimi: CompanyRegister.configuration.username,
+        ariregister_parool: CompanyRegister.configuration.password }
     end
 
     def soap_message

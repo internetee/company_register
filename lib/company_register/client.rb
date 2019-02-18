@@ -13,9 +13,9 @@ module CompanyRegister
 
     # @citizen_country_code format [String] ISO 3166-1 alpha-3
     def representation_rights(citizen_personal_code:, citizen_country_code:)
-      search_params = { 'fyysilise_isiku_kood' => citizen_personal_code,
-                        'fyysilise_isiku_koodi_riik' => citizen_country_code,
-                        'keel' => 'eng' }
+      search_params = { fyysilise_isiku_kood: citizen_personal_code,
+                        fyysilise_isiku_koodi_riik: citizen_country_code,
+                        keel: 'eng' }
 
       request = Request::RepresentationRightsRequest.new(search_params)
       response_body = cache_store.fetch(request,
