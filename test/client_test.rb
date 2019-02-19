@@ -84,6 +84,16 @@ class CompanyRegisterTest < Minitest::Test
     assert_empty companies
   end
 
+  def test_raises_not_available_error
+    stub_request(:post, 'http://company-register.test').to_return(status: 500)
+
+    assert_raises CompanyRegister::NotAvailableError do
+      client = CompanyRegister::Client.new
+      client.representation_rights(citizen_personal_code: '1234',
+                                   citizen_country_code: 'USA')
+    end
+  end
+
   private
 
   def stub_wsdl_request

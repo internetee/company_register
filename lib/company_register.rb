@@ -9,6 +9,7 @@ require 'company_register/request/representation_rights'
 
 module CompanyRegister
   class Error < StandardError; end
+  class NotAvailableError < Error; end
 
   class << self
     attr_accessor :configuration
