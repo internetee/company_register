@@ -8,8 +8,7 @@ require 'company_register/request'
 require 'company_register/request/representation_rights'
 
 module CompanyRegister
-  class Error < StandardError;
-  end
+  class Error < StandardError; end
 
   class << self
     attr_accessor :configuration
