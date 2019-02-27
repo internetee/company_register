@@ -13,9 +13,9 @@ module CompanyRegister
     private_constant :ENDPOINT_PRODUCTION
 
     def initialize(search_params)
-      @soap_client = Savon.client(wsdl: WSDL_TEST,
-                                  host: ENDPOINT_TEST,
-                                  endpoint: ENDPOINT_TEST,
+      @soap_client = Savon.client(wsdl: wsdl,
+                                  host: endpoint,
+                                  endpoint: endpoint,
                                   filters: %i[ariregister_kasutajanimi ariregister_parool],
                                   convert_request_keys_to: :none)
       @search_params = search_params
@@ -43,6 +43,14 @@ module CompanyRegister
 
     def soap_message
       { keha: default_params.merge(search_params) }
+    end
+
+    def wsdl
+      CompanyRegister.configuration.test_mode ? WSDL_TEST : WSDL_PRODUCTION
+    end
+
+    def endpoint
+      CompanyRegister.configuration.test_mode ? ENDPOINT_TEST : ENDPOINT_PRODUCTION
     end
   end
 end

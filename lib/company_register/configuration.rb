@@ -15,6 +15,7 @@ module CompanyRegister
 
     def initialize
       self.cache_store = Rails.cache if defined?(Rails)
+      self.test_mode = false
     end
 
     def cache_period=(value)

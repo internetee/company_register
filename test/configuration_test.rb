@@ -43,4 +43,9 @@ class ConfigurationTest < Minitest::Test
     assert_equal 'rails-cache-store', CompanyRegister.configuration.cache_store
     Object.send(:remove_const, 'Rails')
   end
+
+  def test_test_mode_is_off_by_default
+    CompanyRegister.configure {}
+    refute CompanyRegister.configuration.test_mode
+  end
 end

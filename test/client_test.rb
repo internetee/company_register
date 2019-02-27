@@ -85,7 +85,7 @@ class CompanyRegisterTest < Minitest::Test
   end
 
   def test_raises_not_available_error
-    stub_request(:post, 'http://company-register.test').to_return(status: 500)
+    stub_request(:post, 'https://ariregxmlv6.rik.ee/').to_return(status: 500)
 
     assert_raises CompanyRegister::NotAvailableError do
       client = CompanyRegister::Client.new
@@ -94,17 +94,37 @@ class CompanyRegisterTest < Minitest::Test
     end
   end
 
+  def test_uses_test_environment_when_test_mode_is_on
+    CompanyRegister.configure do |config|
+      config.test_mode = true
+    end
+
+    wsdl_response_body = File.read('test/fixtures/wsdl.xml')
+    wsdl_request = stub_request(:get, 'https://demo-ariregxmlv6.rik.ee/?wsdl')
+                     .to_return(status: 200, body: wsdl_response_body)
+    response_body = File.read('test/fixtures/representation_rights_response_with_payload.xml')
+    request = stub_request(:post, 'https://demo-ariregxmlv6.rik.ee/').to_return(status: 200,
+                                                                                body: response_body)
+
+    client = CompanyRegister::Client.new
+    client.representation_rights(citizen_personal_code: '1234',
+                                 citizen_country_code: 'USA')
+
+    assert_requested wsdl_request
+    assert_requested request
+  end
+
   private
 
   def stub_wsdl_request
     response_body = File.read('test/fixtures/wsdl.xml')
-    stub_request(:get, 'http://company-register.test/wsdl').to_return(status: 200,
-                                                                      body: response_body)
+    stub_request(:get, 'https://ariregxmlv6.rik.ee/?wsdl').to_return(status: 200,
+                                                                     body: response_body)
   end
 
   def stub_request_with_payload
     response_body = File.read('test/fixtures/representation_rights_response_with_payload.xml')
-    stub_request(:post, 'http://company-register.test').
+    stub_request(:post, 'https://ariregxmlv6.rik.ee/').
       with(
         body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ar=\"http://arireg.x-road.eu/producer/\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><ar:esindus_v1><ar:keha><ar:ariregister_kasutajanimi>john</ar:ariregister_kasutajanimi><ar:ariregister_parool>pwd</ar:ariregister_parool><ar:fyysilise_isiku_kood>1234</ar:fyysilise_isiku_kood><ar:fyysilise_isiku_koodi_riik>USA</ar:fyysilise_isiku_koodi_riik><ar:keel>eng</ar:keel></ar:keha></ar:esindus_v1></env:Body></env:Envelope>",
         headers: { 'Soapaction' => '"esindus_v1"' }).to_return(status: 200, body: response_body)
@@ -112,7 +132,7 @@ class CompanyRegisterTest < Minitest::Test
 
   def stub_request_without_payload
     response_body = File.read('test/fixtures/representation_rights_response_without_payload.xml')
-    stub_request(:post, 'http://company-register.test').to_return(status: 200,
-                                                                  body: response_body)
+    stub_request(:post, 'https://ariregxmlv6.rik.ee/').to_return(status: 200,
+                                                                 body: response_body)
   end
 end
