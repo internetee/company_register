@@ -40,7 +40,6 @@ class ConfigurationTest < Minitest::Test
   def test_sets_default_cache_store_when_used_with_rails
     Object.const_set('Rails', OpenStruct.new(cache: 'rails-cache-store'))
     CompanyRegister.configure {}
-    p CompanyRegister.configuration
     assert_equal 'rails-cache-store', CompanyRegister.configuration.cache_store
     Object.send(:remove_const, 'Rails')
   end
