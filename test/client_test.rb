@@ -72,6 +72,7 @@ class CompanyRegisterTest < Minitest::Test
     assert_kind_of Array, companies
     assert_kind_of CompanyRegister::Company, companies.first
     assert_equal '12345', companies.first.registration_number
+    assert_equal 'Acme Ltd', companies.first.company_name
   end
 
   def test_parses_response_without_payload
