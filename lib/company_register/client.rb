@@ -1,5 +1,5 @@
 module CompanyRegister
-  Company = Struct.new(:registration_number)
+  Company = Struct.new(:registration_number, :company_name)
 
   class Client
     # API returns request params back with the response. They are stripped out to avoid caching
@@ -47,7 +47,9 @@ module CompanyRegister
 
       items = body[:esindus_v1_response][:keha][:ettevotjad][:item]
       items = [items] unless items.kind_of?(Array)
-      items.map { |item| Company.new(item[:ariregistri_kood]) }
+      items.map do |item|
+        Company.new(item[:ariregistri_kood], item[:arinimi])
+      end
     end
   end
 end
