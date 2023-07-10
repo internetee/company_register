@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name = 'company_register'
   spec.version = CompanyRegister::VERSION
   spec.authors = ['Artur Beljajev', 'Maciej Szlosarczyk']
-  spec.email = ['artur.beljajev@internet.ee', 'maciej.szlosarczyk@eestiinternet.ee']
+  spec.email = ['artur.beljajev@internet.ee', 'maciej.szlosarczyk@eestiinternet.ee', 'oleg.hasjanov@eestiinternet.ee']
   spec.summary = 'A Ruby interface to the Estonian company register (Äriregister) API'
   spec.homepage = 'https://github.com/internetee/company_register'
   spec.license = 'MIT'
