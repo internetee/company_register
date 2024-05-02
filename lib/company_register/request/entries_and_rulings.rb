@@ -1,10 +1,10 @@
 module CompanyRegister
   class Request
-    class CompanyDetailsRequest < Request
+    class EntriesAndRulingsRequest < Request
       private
 
       def soap_operation
-        :detailandmed_v2
+        :kanded_maarused_v1
       end
     end
   end

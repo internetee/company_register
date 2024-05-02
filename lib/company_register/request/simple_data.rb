@@ -1,10 +1,10 @@
 module CompanyRegister
   class Request
-    class CompanyDetailsRequest < Request
+    class SimpleDataRequest < Request
       private
 
       def soap_operation
-        :detailandmed_v2
+        :lihtandmed_v2
       end
     end
   end
