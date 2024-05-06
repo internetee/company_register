@@ -124,15 +124,28 @@ module CompanyRegister
       items = body[:detailandmed_v2_response][:keha][:ettevotjad][:item]
       items = [items] unless items.kind_of?(Array)
       items.map do |item|
-        kandeliik = item[:registrikaardid][:item][:kanded].map do |reg_pair|
-          reg_pair[1].map do |reg|
-            Struct.new(:kandeliik, :kandeliik_tekstina)
-              .new(reg[:kandeliik], reg[:kandeliik_tekstina])
+        puts item[:registrikaardid][:item][:kanded]
+
+        kandeliik = if item[:registrikaardid][:item][:kanded][:item].kind_of?(Array)
+
+          item[:registrikaardid][:item][:kanded].map do |reg_pair|
+            reg_pair[1].map do |reg|
+
+              Struct.new(:kandeliik, :kandeliik_tekstina)
+                .new(reg[:kandeliik], reg[:kandeliik_tekstina])
+            end
           end
+
+        else
+          Struct.new(:kandeliik, :kandeliik_tekstina)
+          .new(
+            item[:registrikaardid][:item][:kanded][:item][:kandeliik],
+            item[:registrikaardid][:item][:kanded][:item][:kandeliik_tekstina]
+          )
         end
       
         CompanyDetails.new(
-          item[:ariregistri_kood], item[:nimi], item[:yldandmed][:staatus], kandeliik.flatten
+          item[:ariregistri_kood], item[:nimi], item[:yldandmed][:staatus], kandeliik
         )
       end
     end
