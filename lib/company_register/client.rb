@@ -141,8 +141,8 @@ module CompanyRegister
     def return_list_of_registry_cards(item)
       item[:registrikaardid][:item].map do |i|
         i[:kanded][:item].map do |entry|
-          Struct.new(:kandeliik, :kandeliik_tekstina)
-          .new(entry[:kandeliik], entry[:kandeliik_tekstina])
+          Struct.new(:kandeliik, :kandeliik_tekstina, :kande_kpv)
+          .new(entry[:kandeliik], entry[:kandeliik_tekstina], entry[:kande_kpv])
         end
       end
     end
@@ -153,16 +153,17 @@ module CompanyRegister
         item[:registrikaardid][:item][:kanded].map do |reg_pair|
           reg_pair[1].map do |reg|
 
-            Struct.new(:kandeliik, :kandeliik_tekstina)
-              .new(reg[:kandeliik], reg[:kandeliik_tekstina])
+            Struct.new(:kandeliik, :kandeliik_tekstina, :kande_kpv)
+              .new(reg[:kandeliik], reg[:kandeliik_tekstina], reg[:kande_kpv])
           end
         end
 
       else
-        Struct.new(:kandeliik, :kandeliik_tekstina)
+        Struct.new(:kandeliik, :kandeliik_tekstina, :kande_kpv)
         .new(
           item[:registrikaardid][:item][:kanded][:item][:kandeliik],
-          item[:registrikaardid][:item][:kanded][:item][:kandeliik_tekstina]
+          item[:registrikaardid][:item][:kanded][:item][:kandeliik_tekstina],
+          item[:registrikaardid][:item][:kanded][:item][:kande_kpv]
         )
       end
     end
