@@ -124,28 +124,45 @@ module CompanyRegister
       items = body[:detailandmed_v2_response][:keha][:ettevotjad][:item]
       items = [items] unless items.kind_of?(Array)
       items.map do |item|
-        puts item[:registrikaardid][:item][:kanded]
+        kandeliik = nil
 
-        kandeliik = if item[:registrikaardid][:item][:kanded][:item].kind_of?(Array)
-
-          item[:registrikaardid][:item][:kanded].map do |reg_pair|
-            reg_pair[1].map do |reg|
-
-              Struct.new(:kandeliik, :kandeliik_tekstina)
-                .new(reg[:kandeliik], reg[:kandeliik_tekstina])
-            end
-          end
-
+        kandeliik = if item[:registrikaardid][:item].kind_of?(Array)
+          return_list_of_registry_cards(item)
         else
-          Struct.new(:kandeliik, :kandeliik_tekstina)
-          .new(
-            item[:registrikaardid][:item][:kanded][:item][:kandeliik],
-            item[:registrikaardid][:item][:kanded][:item][:kandeliik_tekstina]
-          )
+          return_list_of_kanded_items(item)
         end
       
         CompanyDetails.new(
           item[:ariregistri_kood], item[:nimi], item[:yldandmed][:staatus], kandeliik
+        )
+      end
+    end
+
+    def return_list_of_registry_cards(item)
+      item[:registrikaardid][:item].map do |i|
+        i[:kanded][:item].map do |entry|
+          Struct.new(:kandeliik, :kandeliik_tekstina)
+          .new(entry[:kandeliik], entry[:kandeliik_tekstina])
+        end
+      end
+    end
+
+    def return_list_of_kanded_items(item)
+      if item[:registrikaardid][:item][:kanded][:item].kind_of?(Array)
+
+        item[:registrikaardid][:item][:kanded].map do |reg_pair|
+          reg_pair[1].map do |reg|
+
+            Struct.new(:kandeliik, :kandeliik_tekstina)
+              .new(reg[:kandeliik], reg[:kandeliik_tekstina])
+          end
+        end
+
+      else
+        Struct.new(:kandeliik, :kandeliik_tekstina)
+        .new(
+          item[:registrikaardid][:item][:kanded][:item][:kandeliik],
+          item[:registrikaardid][:item][:kanded][:item][:kandeliik_tekstina]
         )
       end
     end
