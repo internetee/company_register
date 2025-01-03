@@ -131,6 +131,15 @@ class CompanyRegisterTest < Minitest::Test
         headers: { 'Soapaction' => '"esindus_v1"' }).to_return(status: 200, body: response_body)
   end
 
+  # TODO:
+  # def stub_request_with_payload_of_company_details
+  #   response_body = File.read('test/fixtures/deleted_company.xml')
+  #   stub_request(:post, 'https://ariregxmlv6.rik.ee/').
+  #     with(
+  #       body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ar=\"http://arireg.x-road.eu/producer/\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><ar:esindus_v1><ar:keha><ar:ariregister_kasutajanimi>john</ar:ariregister_kasutajanimi><ar:ariregister_parool>pwd</ar:ariregister_parool><ar:fyysilise_isiku_kood>1234</ar:fyysilise_isiku_kood><ar:fyysilise_isiku_koodi_riik>USA</ar:fyysilise_isiku_koodi_riik><ar:keel>eng</ar:keel></ar:keha></ar:esindus_v1></env:Body></env:Envelope>",
+  #       headers: { 'Soapaction' => '"esindus_v1"' }).to_return(status: 200, body: response_body)
+  # end
+
   def stub_request_without_payload
     response_body = File.read('test/fixtures/representation_rights_response_without_payload.xml')
     stub_request(:post, 'https://ariregxmlv6.rik.ee/').to_return(status: 200,
