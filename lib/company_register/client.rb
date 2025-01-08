@@ -140,9 +140,13 @@ module CompanyRegister
 
     def return_list_of_registry_cards(item)
       item[:registrikaardid][:item].map do |i|
-        i[:kanded][:item].map do |entry|
+        # Проверяем, является ли :item массивом
+        kanded_items = i[:kanded][:item]
+        kanded_items = [kanded_items] unless kanded_items.kind_of?(Array)
+        
+        kanded_items.map do |entry|
           Struct.new(:kandeliik, :kandeliik_tekstina, :kande_kpv)
-          .new(entry[:kandeliik], entry[:kandeliik_tekstina], entry[:kande_kpv])
+            .new(entry[:kandeliik], entry[:kandeliik_tekstina], entry[:kande_kpv])
         end
       end
     end
