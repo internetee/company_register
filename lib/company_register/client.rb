@@ -6,6 +6,7 @@ module CompanyRegister
     :company_name,
     :status,
     :kandeliik,
+    :phone_numbers,
   )
 
   class Client
@@ -131,18 +132,24 @@ module CompanyRegister
         else
           return_list_of_kanded_items(item)
         end
+
+        phone_numbers = extract_phone_numbers(item)
       
         CompanyDetails.new(
-          item[:ariregistri_kood], item[:nimi], item[:yldandmed][:staatus], kandeliik
+          item[:ariregistri_kood], item[:nimi], item[:yldandmed][:staatus], kandeliik, phone_numbers
         )
       end
     end
 
     def return_list_of_registry_cards(item)
       item[:registrikaardid][:item].map do |i|
-        i[:kanded][:item].map do |entry|
+        # Проверяем, является ли :item массивом
+        kanded_items = i[:kanded][:item]
+        kanded_items = [kanded_items] unless kanded_items.kind_of?(Array)
+        
+        kanded_items.map do |entry|
           Struct.new(:kandeliik, :kandeliik_tekstina, :kande_kpv)
-          .new(entry[:kandeliik], entry[:kandeliik_tekstina], entry[:kande_kpv])
+            .new(entry[:kandeliik], entry[:kandeliik_tekstina], entry[:kande_kpv])
         end
       end
     end
@@ -190,6 +197,18 @@ module CompanyRegister
           item[:ariregistri_kood], item[:evnimi], item[:staatus], maarused
         )
       end
+    end
+
+    def extract_phone_numbers(item)
+      return [] unless item[:yldandmed] && item[:yldandmed][:sidevahendid] && item[:yldandmed][:sidevahendid][:item]
+
+      contacts = item[:yldandmed][:sidevahendid][:item]
+      contacts = [contacts] unless contacts.kind_of?(Array)
+
+      contacts
+        .select { |contact| contact[:liik] == "TEL" || contact[:liik] == "MOB" }
+        .map { |contact| contact[:sisu].delete(' ') }
+        .uniq
     end
   end
 end
