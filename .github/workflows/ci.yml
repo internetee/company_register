@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    
+    - name: Install dependencies
+      run: bundle install
+    
+    - name: Run tests with coverage
+      run: bundle exec rake test
+      env:
+        COVERAGE: true
+        SIMPLECOV: true
+    
+    - name: Install Qlty CLI
+      run: curl https://qlty.sh | sh
+    
+    - name: Upload coverage to Qlty
+      if: success() && github.event_name == 'push'
+      run: |
+        if [ -f coverage/coverage.json ]; then
+          QLTY_COVERAGE_TOKEN=${{ secrets.QLTY_COVERAGE_TOKEN }} qlty coverage publish coverage/coverage.json
+          echo "Coverage uploaded to Qlty successfully!"
+        else
+          echo "No coverage file found at coverage/coverage.json"
+          ls -la coverage/ || echo "Coverage directory does not exist"
+        fi
+      env:
+        QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
