@@ -23,6 +23,8 @@ module CompanyRegister
 
     def perform
       soap_client.call(soap_operation, message: soap_message)
+    rescue Savon::SOAPFault => e
+      raise SOAPFaultError, e.message
     rescue Savon::Error
       raise NotAvailableError
     end
