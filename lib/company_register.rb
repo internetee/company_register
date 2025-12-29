@@ -13,6 +13,7 @@ require 'company_register/request/entries_and_rulings'
 module CompanyRegister
   class Error < StandardError; end
   class NotAvailableError < Error; end
+  class SOAPFaultError < Error; end
 
   class << self
     attr_accessor :configuration
