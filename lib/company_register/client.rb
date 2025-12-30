@@ -9,6 +9,13 @@ module CompanyRegister
     :phone_numbers,
   )
 
+  EInvoiceRecipient = Struct.new(
+    :registration_number,
+    :company_name,
+    :service_provider,
+    :status
+  )
+
   class Client
     # API returns request params back with the response. They are stripped out to avoid caching
     # them.
@@ -82,6 +89,20 @@ module CompanyRegister
       response_body = filter_response_body(response.body, :kanded_maarused_v1_response)
 
       parse_entries_and_rulings_response_body(response_body)
+    end
+
+    def e_invoice_recipients(registration_numbers:, return_names: false, page: 1)
+      search_params = {
+        registrikoodid: { registrikood: registration_numbers },
+        tagasta_nimed: return_names,
+        tulemuste_lk: page
+      }
+
+      request = Request::EInvoiceRecipientsRequest.new(search_params)
+      response = request.perform
+      response_body = filter_response_body(response.body, :earve_registri_paring_v1_response)
+
+      parse_e_invoice_recipients_response_body(response_body)
     end
 
     private
@@ -209,6 +230,16 @@ module CompanyRegister
         .select { |contact| contact[:liik] == "TEL" || contact[:liik] == "MOB" }
         .map { |contact| contact[:sisu].delete(' ') }
         .uniq
+    end
+
+    def parse_e_invoice_recipients_response_body(body)
+      return [] unless body[:earve_registri_paring_v1_response][:keha][:kliendid]
+
+      items = body[:earve_registri_paring_v1_response][:keha][:kliendid][:klient]
+      items = [items] unless items.kind_of?(Array)
+      items.map do |item|
+        EInvoiceRecipient.new(item[:registrikood], item[:nimi], item[:teenusepakkuja], item[:staatus])
+      end
     end
   end
 end

@@ -85,6 +85,20 @@ class CompanyRegisterTest < Minitest::Test
     assert_empty companies
   end
 
+  def test_e_invoice_recipients
+    stub_e_invoice_recipients_request
+
+    client = CompanyRegister::Client.new
+    recipients = client.e_invoice_recipients(registration_numbers: ['70000310'])
+
+    assert_kind_of Array, recipients
+    assert_kind_of CompanyRegister::EInvoiceRecipient, recipients.first
+    assert_equal '70000310', recipients.first.registration_number
+    assert_equal 'Registrite ja Infosüsteemide Keskus', recipients.first.company_name
+    assert_equal 'Fitek', recipients.first.service_provider
+    assert_equal 'OK', recipients.first.status
+  end
+
   def test_raises_not_available_error
     stub_request(:post, 'https://ariregxmlv6.rik.ee/').to_return(status: 500)
 
@@ -127,7 +141,7 @@ class CompanyRegisterTest < Minitest::Test
     response_body = File.read('test/fixtures/representation_rights_response_with_payload.xml')
     stub_request(:post, 'https://ariregxmlv6.rik.ee/').
       with(
-        body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ar=\"http://arireg.x-road.eu/producer/\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><ar:esindus_v1><ar:keha><ar:ariregister_kasutajanimi>john</ar:ariregister_kasutajanimi><ar:ariregister_parool>pwd</ar:ariregister_parool><ar:fyysilise_isiku_kood>1234</ar:fyysilise_isiku_kood><ar:fyysilise_isiku_koodi_riik>USA</ar:fyysilise_isiku_koodi_riik><ar:keel>eng</ar:keel></ar:keha></ar:esindus_v1></env:Body></env:Envelope>",
+        body: /esindus_v1.*fyysilise_isiku_kood>1234.*fyysilise_isiku_koodi_riik>USA/,
         headers: { 'Soapaction' => '"esindus_v1"' }).to_return(status: 200, body: response_body)
   end
 
@@ -144,5 +158,13 @@ class CompanyRegisterTest < Minitest::Test
     response_body = File.read('test/fixtures/representation_rights_response_without_payload.xml')
     stub_request(:post, 'https://ariregxmlv6.rik.ee/').to_return(status: 200,
                                                                  body: response_body)
+  end
+
+  def stub_e_invoice_recipients_request
+    response_body = File.read('test/fixtures/e_invoice_recipients_response.xml')
+    stub_request(:post, 'https://ariregxmlv6.rik.ee/').
+      with(
+        body: /earveRegistriParing_v1/,
+        headers: { 'Soapaction' => '"earveRegistriParing_v1"' }).to_return(status: 200, body: response_body)
   end
 end

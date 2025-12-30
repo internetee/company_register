@@ -9,6 +9,7 @@ require 'company_register/request/representation_rights'
 require 'company_register/request/simple_data'
 require 'company_register/request/company_details'
 require 'company_register/request/entries_and_rulings'
+require 'company_register/request/e_invoice_recipients'
 
 module CompanyRegister
   class Error < StandardError; end
