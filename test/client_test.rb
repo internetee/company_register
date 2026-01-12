@@ -63,7 +63,12 @@ class CompanyRegisterTest < Minitest::Test
   end
 
   def test_parses_response_with_payload
-    stub_request_with_payload
+    response_body = File.read('test/fixtures/representation_rights_response_with_payload.xml')
+    stub_request(:post, "https://ariregxmlv6.rik.ee/").
+      with(
+        body: /esindus_v1/,
+        headers: { 'Soapaction' => '"esindus_v1"' }).
+      to_return(status: 200, body: response_body)
 
     client = CompanyRegister::Client.new
     companies = client.representation_rights(citizen_personal_code: '1234',
